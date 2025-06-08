@@ -1,0 +1,35 @@
+{
+  "name": "error-message-analyser-backend",
+  "version": "1.0.0",
+  "description": "Backend for Error Message Analyser",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "error",
+    "analysis",
+    "hono",
+    "typescript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ai-sdk/openai": "^1.3.22",
+    "@ai-sdk/openai-compatible": "^0.2.14",
+    "@hono/node-server": "^1.8.2",
+    "@hono/zod-validator": "^0.1.8",
+    "ai": "^4.3.16",
+    "hono": "^4.0.7",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
