@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { serve } from "@hono/node-server";
 import { analyzeRouter } from "./routes/analyze";
+import { errorsRouter } from "./routes/errors";
 
 const app = new Hono();
 
@@ -14,7 +15,9 @@ app.get("/health", (c) => {
 });
 
 // API routes
-const apiRoutes = new Hono().route("/analyze", analyzeRouter);
+const apiRoutes = new Hono()
+  .route("/analyze", analyzeRouter)
+  .route("/errors", errorsRouter);
 
 app.route("/api", apiRoutes);
 
