@@ -2,6 +2,8 @@ import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import { analysisRequestSchema, AnalysisResponse } from '../types/analysis';
 import { llmService } from '../lib/llm-service';
+import { db } from '../db';
+import { errorMessages } from '../db/schema';
 
 const analyzeRouter = new Hono();
 
@@ -12,7 +14,9 @@ analyzeRouter.post(
     const { message } = c.req.valid('json');
     
     try {
-      const result = await llmService.analyzeErrorMessage(message);
+      const result: AnalysisResponse = await llmService.analyzeErrorMessage(message);
+      // Store the original message and the analysis result in the database
+      await db.insert(errorMessages).values({ message, analysis: JSON.stringify(result) });
       return c.json(result);
     } catch (error) {
       console.error('Error analyzing message:', error);
